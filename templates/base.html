@@ -1,0 +1,27 @@
+{% load static %}
+<html>
+	<head>
+		<title>Blogie</title>
+		<link rel='stylesheet' href='{% static "css/base.css" %}'>
+		<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400' rel='stylesheet'>
+	</head>
+	<body>
+		<header>
+			<h1><a href="/">Blogie</a></h1>
+		</header>
+        {% if user.is_authenticated %}
+            <p>Hi {{ user.username }}</p>
+            <p><a href="{% url 'logout' %}">logout</a></p>
+        {% else %}
+            <p>You are not loged in.</p>
+            <a href="{% url 'login' %}">login</a>
+        {% endif %}
+		<div class="container">
+			{% block content %}
+			{% endblock %}
+            <div class="nav-right">
+				<a href="{% url 'post_new' %}">+ New Blog post</a>
+			</div>
+		</div>
+	</body>
+</html>
